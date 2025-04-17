@@ -1,5 +1,18 @@
 {
-    "HomePage":{
-        "1":"hello"
+    "Header":{
+        "1":"Home",
+        "2":"Contact",
+        "3":"About",
+        "4":"Sign Up",
+        "5":"What are you looking for?"
+       
+    },
+    "Discount":{
+        "1":"Flash Sales",
+        "2":"Days",
+        "3":"Hours",
+        "4":"Minutes",
+        "5":"Seconds"
     }
+
 }
