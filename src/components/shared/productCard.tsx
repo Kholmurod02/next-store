@@ -7,6 +7,8 @@ import { cn } from "@/components/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { URL } from "@/utils/config"
+import Link from "next/link"
 
 interface Product {
   id: number
@@ -38,15 +40,12 @@ export default function ProductCard({ el, onAddToCart, onAddToWishlist, onQuickV
     onAddToWishlist?.(el.id)
   }
 
-  const handleQuickView = () => {
-    onQuickView?.(el.id)
-  }
+ 
 
   const handleAddToCart = () => {
     onAddToCart?.(el.id)
   }
 
-  const imageUrl = `/images/${el.image}` // путь к изображению
 
   return (
     <Card className="group w-[400px] relative border-0 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
@@ -67,19 +66,20 @@ export default function ProductCard({ el, onAddToCart, onAddToWishlist, onQuickV
           >
             <Heart className={cn("h-5 w-5", isWishlisted ? "fill-red-500 stroke-red-500" : "stroke-gray-600")} />
           </button>
+          <Link href={`/products/${el.id}`}>
           <button
-            onClick={handleQuickView}
             className="bg-white rounded-full p-2 shadow-sm transition-all hover:scale-110"
             aria-label="Quick view"
           >
             <Eye className="h-5 w-5 stroke-gray-600" />
           </button>
+          </Link>
         </div>
 
         {/* Product Image */}
         <div className="relative aspect-square bg-gray-50">
           <Image
-            src={imageUrl}
+            src={`${URL}/images/${el.image}`}
             alt={el.productName}
             fill
             className="object-contain p-4"

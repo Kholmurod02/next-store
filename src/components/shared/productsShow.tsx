@@ -1,10 +1,9 @@
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
+
 import ps from "@/images/ps5slim.png"
-import hatt from "@/images/womanhat.png"
 import parfume from "@/images/parfume.png"
 import speakers from "@/images/amazonecho.png"
+import { Card, CardContent } from "../ui/card"
 
 export default function ProductShowcase() {
   return (
@@ -37,7 +36,7 @@ export default function ProductShowcase() {
             <CardContent className="p-0 relative h-[200px] flex flex-col justify-end">
               <div className="absolute inset-0 z-0">
                 <Image
-                  src={hatt}
+                  src={ps}
                   alt="Women's Collections"
                   fill
                   className="object-cover"
