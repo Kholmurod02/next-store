@@ -63,8 +63,8 @@ export default function ProductDetail() {
   const { data, isLoading, error } = useGetProductByIdQuery(id)
 
   // Default data if none is provided
-  const productData = data?.data || 
-   {
+  const productData = data?.data ||
+  {
     id: 14,
     brand: "Apple",
     color: "black",
@@ -118,28 +118,32 @@ export default function ProductDetail() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Product Images */}
         <div className="space-y-4">
+          {/* Main Image */}
           <div className="relative aspect-square overflow-hidden rounded-xl border bg-background">
-            <Image
-              src={`${URL}/images/${productData.image}`}
-              alt={productData.productName}
-              fill
-              className="object-cover"
-              priority
-            />
+            {productData?.images?.[selectedImage] && (
+              <Image
+                src={`${URL}/images/${productData.images[selectedImage].images}`}
+                alt={productData.productName}
+                fill
+                className="object-cover w-full h-full"
+              />
+            )}
           </div>
+
+          {/* Thumbnails */}
           <div className="flex gap-2 overflow-auto pb-2 hide-scrollbar">
-            {productData.images.map((img, index) => (
+            {productData?.images?.map((image, index) => (
               <button
-                key={img.id}
+                key={image.id}
                 className={`relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border-2 ${selectedImage === index ? "border-primary" : "border-border"
                   }`}
                 onClick={() => setSelectedImage(index)}
               >
                 <Image
-                  src="/placeholder.svg?height=80&width=80"
+                  src={`${URL}/images/${image.images}`}
                   alt={`${productData.productName} thumbnail ${index + 1}`}
+                  className="object-cover w-full h-full"
                   fill
-                  className="object-cover"
                 />
               </button>
             ))}
@@ -180,9 +184,9 @@ export default function ProductDetail() {
                 <button
                   className="h-8 w-8 rounded-full  ring-2 ring-primary ring-offset-2"
                   aria-label="Select black color"
-                  style={{backgroundColor:productData.color}}
+                  style={{ backgroundColor: productData.color }}
                 />
-               
+
               </div>
             </div>
 
@@ -195,13 +199,13 @@ export default function ProductDetail() {
                   </Button>
                 ))} */}
                 <Button key={productData.size} variant={productData.size === productData.size ? "default" : "outline"} className="h-10 w-10">
-                    {productData?.size}
-                  </Button>
+                  {productData?.size}
+                </Button>
               </div>
             </div>
 
             <div>
-              <h3 className="font-medium mb-2">Quantity:</h3>
+              <h3 className="font-medium mb-2">Quantity:{productData.quantity}</h3>
               <div className="flex items-center border rounded-md w-fit">
                 <Button
                   variant="ghost"
@@ -260,7 +264,7 @@ export default function ProductDetail() {
               <TabsTrigger value="description">Description</TabsTrigger>
               <TabsTrigger value="specifications">Specifications</TabsTrigger>
             </TabsList>
-              {/* <TabsTrigger value="reviews">Reviews</TabsTrigger> */}
+            {/* <TabsTrigger value="reviews">Reviews</TabsTrigger> */}
             <TabsContent value="description" className="pt-4">
               <p className="text-muted-foreground">
                 {productData.description}. The latest model from {productData.brand} featuring cutting-edge technology,

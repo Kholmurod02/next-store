@@ -9,10 +9,9 @@ const Products = () => {
 
   const productData = data?.data?.products || []
 
-  console.log(productData);
   
   return (
-    <div>
+    <>
       {
         productData.map((el)=>{
           return (
@@ -20,7 +19,7 @@ const Products = () => {
           )
         })
       }
-    </div>
+    </>
   )
 }
 

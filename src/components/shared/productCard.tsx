@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { URL } from "@/utils/config"
 import Link from "next/link"
+import { useAddProductToCartMutation } from "@/store/api/cartApiSlice"
 
 interface Product {
   id: number
@@ -40,16 +41,17 @@ export default function ProductCard({ el, onAddToCart, onAddToWishlist, onQuickV
     onAddToWishlist?.(el.id)
   }
 
+  const [addProductToCart] = useAddProductToCartMutation()
  
 
-  const handleAddToCart = () => {
-    onAddToCart?.(el.id)
+  const handleAddToCart = (id:number | string) => {
+    addProductToCart(id)
   }
 
 
   return (
-    <Card className="group w-[400px] relative border-0 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
-      <div className="relative">
+    <Card className="group w-[370px]  relative border-0 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+      <div className="relative w-full">
         {/* Discount Badge */}
         {el.hasDiscount && (
           <Badge className="absolute top-3 left-3 z-10 bg-red-500 hover:bg-red-600 text-white">
@@ -77,7 +79,7 @@ export default function ProductCard({ el, onAddToCart, onAddToWishlist, onQuickV
         </div>
 
         {/* Product Image */}
-        <div className="relative aspect-square bg-gray-50">
+        <div className="relative aspect-square ">
           <Image
             src={`${URL}/images/${el.image}`}
             alt={el.productName}
@@ -90,7 +92,7 @@ export default function ProductCard({ el, onAddToCart, onAddToWishlist, onQuickV
         {/* Add to Cart Button - Appears on Hover */}
         <div className="absolute inset-0 flex items-center justify-center bg-black/5 opacity-0 transition-opacity group-hover:opacity-100">
           <Button
-            onClick={handleAddToCart}
+            onClick={()=>handleAddToCart(el.id)}
             className="bg-white text-gray-800 hover:bg-gray-100 shadow-md transition-transform transform translate-y-4 group-hover:translate-y-0"
           >
             <ShoppingCart className="mr-2 h-4 w-4" />

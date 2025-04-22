@@ -1,6 +1,6 @@
 // import { BASIC_URL } from '@/utils/config';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import { GET_CATEGORIES } from '../constants/categoryConstants';
+import { GET_BRANDS, GET_CATEGORIES } from '../constants/categoryConstants';
 
 
 export const CategoryApi = createApi ({
@@ -11,9 +11,12 @@ export const CategoryApi = createApi ({
     // tagTypes: ["categories"],
     endpoints: (builder)=>({
         getCategories : builder.query({
-            query: ()=> "/Category/get-categories"
+            query: ()=> GET_CATEGORIES
+        }),
+        getBrands : builder.query({
+            query: ()=> GET_BRANDS
         })
     })
 })
 
-export const {useGetCategoriesQuery} = CategoryApi
+export const {useGetCategoriesQuery,useGetBrandsQuery} = CategoryApi
