@@ -57,5 +57,5 @@ export const UlCategories = () => {
   ul::-webkit-scrollbar {
     display: none;
   }
-`}</style>
+`}</style>  
 
