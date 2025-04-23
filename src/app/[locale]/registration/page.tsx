@@ -9,28 +9,41 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
+import { useRegistrationMutation } from "@/store/api/authApiSlice"
+import { useRouter } from "next/navigation"
 
-export default function SignupForm() {
-  const [formData, setFormData] = useState({
-    userName: "",
-    phoneNumber: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  })
+export default function RegistrationPage() {
+
+  const [userName,setUserName] = useState("")
+  const [phoneNumber,setPhoneNumber] = useState("")
+  const [email,setEmail] = useState("")
+  const [password,setPassword] = useState("")
+  const [confirmPassword,setConfirmPassword] = useState("")
 
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const router = useRouter()
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const [registration] = useRegistrationMutation()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(formData)
-    // Handle form submission logic here
+    const newUser = {
+      userName:userName,
+      phoneNumber:phoneNumber,
+      email:email,
+      password:password,
+      confirmPassword:confirmPassword,
+    }
+    try {
+      const {data} = await registration(newUser).unwrap()
+      if(data?.statusCode == 200){
+        router.push("/login")
+      }
+    } catch (error) {
+      console.error(error);
+      
+    }
   }
 
   return (
@@ -47,8 +60,8 @@ export default function SignupForm() {
               id="userName"
               name="userName"
               placeholder="Enter your user name"
-              value={formData.userName}
-              onChange={handleChange}
+              value={userName}
+              onChange={(e)=>setUserName(e.target.value)}
               required
             />
           </div>
@@ -59,8 +72,8 @@ export default function SignupForm() {
               id="phoneNumber"
               name="phoneNumber"
               placeholder="+1 (555) 000-0000"
-              value={formData.phoneNumber}
-              onChange={handleChange}
+              value={phoneNumber}
+              onChange={(e)=>setPhoneNumber(e.target.value)}
               required
             />
           </div>
@@ -72,8 +85,8 @@ export default function SignupForm() {
               name="email"
               type="email"
               placeholder="example@example.com"
-              value={formData.email}
-              onChange={handleChange}
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               required
             />
           </div>
@@ -85,8 +98,8 @@ export default function SignupForm() {
                 id="password"
                 name="password"
                 type={showPassword ? "text" : "password"}
-                value={formData.password}
-                onChange={handleChange}
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
                 required
               />
               <Button
@@ -109,8 +122,8 @@ export default function SignupForm() {
                 id="confirmPassword"
                 name="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
-                value={formData.confirmPassword}
-                onChange={handleChange}
+                value={confirmPassword}
+                onChange={(e)=>setConfirmPassword(e.target.value)}
                 required
               />
               <Button

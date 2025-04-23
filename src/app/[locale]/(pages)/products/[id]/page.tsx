@@ -10,9 +10,10 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useGetProductByIdQuery } from "@/store/api/productApiSlice"
 import { URL } from "@/utils/config"
+import { useAddProductToCartMutation } from "@/store/api/cartApiSlice"
 
 interface ProductImage {
   id: number
@@ -111,6 +112,20 @@ export default function ProductDetail() {
     if (quantity > 1) {
       setQuantity((prev) => prev - 1)
     }
+  }
+
+  const [addProductToCart] = useAddProductToCartMutation()
+  const router = useRouter()
+
+  const handleAddToCart = async (id: number | string) => {
+    try {
+      await addProductToCart(id).unwrap()
+    } catch (error: any) {
+      if (error.status === 401) {
+        router.push("/login")
+      }
+    }
+
   }
 
   return (
@@ -225,7 +240,9 @@ export default function ProductDetail() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">
-            <Button className="flex-1 gap-2" size="lg">
+            <Button 
+            onClick={()=>handleAddToCart(productData.id)}
+            className="flex-1 gap-2" size="lg">
               <ShoppingCart className="h-5 w-5" />
               Add to Cart
             </Button>

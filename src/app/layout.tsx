@@ -7,6 +7,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import Footer from "@/components/shared/footer";
 import StoreProvider from "@/store/storeProvider";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,7 @@ export default async function RootLayout({
     messages = await getMessages({ locale: params.locale });
   } catch (error) {
     console.error(error);
-    
+
     notFound();
   }
 
@@ -47,13 +48,17 @@ export default async function RootLayout({
       >
         <StoreProvider>
 
-        <NextIntlClientProvider locale={params.locale} messages={messages}>
-          
+          <NextIntlClientProvider locale={params.locale} messages={messages}>
+
             <Header />
             {children}
-            <Footer/>
-          
-        </NextIntlClientProvider>
+            <Footer />
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
+
+          </NextIntlClientProvider>
         </StoreProvider>
       </body>
     </html>

@@ -1,6 +1,6 @@
 import { URL } from "@/utils/config";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { LOGIN } from "../constants/authConstants";
+import { LOGIN, REGISTRATION } from "../constants/authConstants";
 import { useRouter } from "next/navigation";
 
 
@@ -27,8 +27,16 @@ export const AuthApi = createApi({
                 body: body
             }),
             invalidatesTags:["user"]
+        }),
+        registration: builder.mutation({
+            query: (body) => ({
+                url: REGISTRATION,
+                method: "POST",
+                body: body
+            }),
+            invalidatesTags:["user"]
         })
     })
 })
 
-export const { useLoginMutation } = AuthApi
+export const { useLoginMutation, useRegistrationMutation } = AuthApi
