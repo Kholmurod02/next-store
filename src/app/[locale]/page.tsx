@@ -27,7 +27,7 @@ export default async function HomePage() {
 
       <Discount />
 
-      <div className=" w-[95%] flex justify-between gap-5 overflow-x-auto m-auto mt-20">
+      <div className=" w-[95%] flex overflow-auto justify-between gap-5  m-auto mt-20">
         <Products />
       </div>
 

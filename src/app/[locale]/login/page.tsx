@@ -9,12 +9,14 @@ import { Button } from "@/components/ui/button"
 import { Eye, EyeOff, Router } from "lucide-react"
 import { useLoginMutation } from "@/store/api/authApiSlice"
 import { useRouter } from "next/navigation"
-import Link from "next/link"
+import toast from 'react-hot-toast'
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  const [data,setData] = useState("")
   const router = useRouter()
   const [login] = useLoginMutation()
 
@@ -26,15 +28,15 @@ export default function LoginPage() {
     }
     try {
       const { data } = await login(user).unwrap()
-      console.log(data);
+      toast.success("Successfully entered")
+      setData(data)
       if(data){
         localStorage.setItem("access_token", data)
         router.push("/")
       }
-      
     } catch (error) {
       console.error(error);
-
+      toast.error("Your UserName or Password is incorrect!!!")
     }
 
   }

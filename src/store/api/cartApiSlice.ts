@@ -8,9 +8,9 @@ import {
   INCREASE_PRODUCT_IN_CART, 
   REDUCE_PRODUCT_IN_CART 
 } from "../constants/cartConstants";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
-const router = useRouter()
+// const router = useRouter()
 
 export const CartApi = createApi({
     reducerPath: "cartApi", // Changed from "cartCatch" to more conventional "cartApi"
@@ -67,7 +67,7 @@ export const CartApi = createApi({
                 method: "POST"        
             }),
             invalidatesTags: ["Cart"]
-            
+
         }),
     })
 });

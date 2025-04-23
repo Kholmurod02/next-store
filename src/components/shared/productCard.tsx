@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { URL } from "@/utils/config"
 import Link from "next/link"
 import { useAddProductToCartMutation } from "@/store/api/cartApiSlice"
+import { useRouter } from "next/navigation"
 
 interface Product {
   id: number
@@ -42,10 +43,19 @@ export default function ProductCard({ el, onAddToCart, onAddToWishlist, onQuickV
   }
 
   const [addProductToCart] = useAddProductToCartMutation()
- 
+  const router = useRouter()
 
-  const handleAddToCart = (id:number | string) => {
-    addProductToCart(id)
+
+  const handleAddToCart = async (id: number | string) => {
+    try {
+
+       await addProductToCart(id).unwrap()
+    } catch (error: any) {
+      if (error.status === 401) {
+        router.push("/login")
+      }
+    }
+
   }
 
 
@@ -69,12 +79,12 @@ export default function ProductCard({ el, onAddToCart, onAddToWishlist, onQuickV
             <Heart className={cn("h-5 w-5", isWishlisted ? "fill-red-500 stroke-red-500" : "stroke-gray-600")} />
           </button>
           <Link href={`/products/${el.id}`}>
-          <button
-            className="bg-white rounded-full p-2 shadow-sm transition-all hover:scale-110"
-            aria-label="Quick view"
-          >
-            <Eye className="h-5 w-5 stroke-gray-600" />
-          </button>
+            <button
+              className="bg-white rounded-full p-2 shadow-sm transition-all hover:scale-110"
+              aria-label="Quick view"
+            >
+              <Eye className="h-5 w-5 stroke-gray-600" />
+            </button>
           </Link>
         </div>
 
@@ -92,7 +102,7 @@ export default function ProductCard({ el, onAddToCart, onAddToWishlist, onQuickV
         {/* Add to Cart Button - Appears on Hover */}
         <div className="absolute inset-0 flex items-center justify-center bg-black/5 opacity-0 transition-opacity group-hover:opacity-100">
           <Button
-            onClick={()=>handleAddToCart(el.id)}
+            onClick={() => handleAddToCart(el.id)}
             className="bg-white text-gray-800 hover:bg-gray-100 shadow-md transition-transform transform translate-y-4 group-hover:translate-y-0"
           >
             <ShoppingCart className="mr-2 h-4 w-4" />

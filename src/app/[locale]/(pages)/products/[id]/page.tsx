@@ -267,9 +267,9 @@ export default function ProductDetail() {
             {/* <TabsTrigger value="reviews">Reviews</TabsTrigger> */}
             <TabsContent value="description" className="pt-4">
               <p className="text-muted-foreground">
-                {productData.description}. The latest model from {productData.brand} featuring cutting-edge technology,
+                {productData.productName}. The latest model from {productData.brand} featuring cutting-edge technology,
                 exceptional camera quality, and all-day battery life. Experience the next generation of smartphone
-                innovation with the {productData.productName}.
+                innovation with the {productData.description}.
               </p>
             </TabsContent>
             <TabsContent value="specifications" className="pt-4">

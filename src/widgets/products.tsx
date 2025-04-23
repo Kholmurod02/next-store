@@ -2,6 +2,7 @@
 
 import ProductCard from '@/components/shared/productCard'
 import { useGetProductsQuery } from '@/store/api/productApiSlice'
+import { IProduct } from '@/types'
 import React from 'react'
 
 const Products = () => {
@@ -13,7 +14,7 @@ const Products = () => {
   return (
     <>
       {
-        productData.map((el)=>{
+        productData.map((el: IProduct)=>{
           return (
             <ProductCard el={el}  key={el.id}/>
           )
