@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import logo from '@/images/logoFastCart.png'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
-import { CircleUser, Heart, LogOut, Menu, Search, ShoppingCart, User, X, ChevronDown } from 'lucide-react'
+import { CircleUser, Heart, LogOut, Menu, Search, ShoppingCart, User, X, ChevronDown, LogIn } from 'lucide-react'
 import { Input } from '../ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
@@ -133,6 +133,12 @@ const Header = () => {
                                     <Link href={"/account"}>
                                         <h1 className='flex items-center gap-3 hover:bg-gray-50 hover:text-blue-600 p-3 rounded-md transition-colors duration-200 text-sm'> 
                                             <CircleUser size={16} />My Account
+                                        </h1>
+                                    </Link>
+                                    <hr className='my-1' />
+                                    <Link href={"/login"}>
+                                        <h1 className='flex items-center gap-3 hover:bg-gray-50 hover:text-blue-600 p-3 rounded-md transition-colors duration-200 text-sm'> 
+                                            <LogIn size={16} />Log In
                                         </h1>
                                     </Link>
                                     <hr className='my-1' />

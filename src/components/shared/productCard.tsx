@@ -42,6 +42,7 @@ export default function ProductCard({ el, onAddToCart, onAddToWishlist, onQuickV
     onAddToWishlist?.(el.id)
   }
 
+
   const [addProductToCart] = useAddProductToCartMutation()
   const router = useRouter()
 

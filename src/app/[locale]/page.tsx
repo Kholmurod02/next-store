@@ -7,7 +7,7 @@ import Speaker from "@/components/shared/speaker";
 import Swiperr from "@/components/shared/swiper";
 import { Button } from "@/components/ui/button";
 import Categories, { UlCategories } from "@/widgets/categories";
-import Products from "@/widgets/products";
+import Products, { ProductsInSwiper } from "@/widgets/products";
 import Link from "next/link";
 
 
@@ -27,9 +27,11 @@ export default async function HomePage() {
 
       <Discount />
 
-      <div className=" w-[95%] flex overflow-auto justify-between gap-5  m-auto mt-20">
+      {/* <div className=" w-[95%] flex overflow-auto justify-between gap-5  m-auto mt-20">
         <Products />
-      </div>
+      </div> */}
+
+      <ProductsInSwiper/>
 
       <div className="flex justify-center items-center my-15">
         <Link href={"/products"}><Button>View All Products</Button></Link>
