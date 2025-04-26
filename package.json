@@ -4,7 +4,7 @@
   "private": true,
  "scripts": {
   "dev": "next dev",
-  "build": "NEXT_DISABLE_ESLINT_PLUGIN=true next build",
+  "build": "npm install --legacy-peer-deps && NEXT_DISABLE_ESLINT_PLUGIN=true next build",
   "start": "next start",
   "lint": "next lint"
 },
