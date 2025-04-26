@@ -1,6 +1,5 @@
-// next.config.ts
 import type { NextConfig } from "next";
-import createNextIntlPlugin from 'next-intl/plugin';
+import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -11,10 +10,10 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   typescript: {
-    ignoreBuildErrors: true, // ✅ Ignore type errors during build
+    ignoreBuildErrors: true,
   },
   eslint: {
-    ignoreDuringBuilds: true, // ✅ Ignore eslint errors during build
+    ignoreDuringBuilds: true,
   },
 };
 
