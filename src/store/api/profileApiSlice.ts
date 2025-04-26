@@ -15,11 +15,20 @@ export const ProfileApi = createApi({
             return headers;
         }
     }),
+    tagTypes:["userProfile"],
     endpoints: (builder) => ({
         getProfileById: builder.query({
             query: (id) => `/UserProfile/get-user-profile-by-id?id=${id}`
         }),
+        updateUserProfile: builder.mutation({
+            query: (formData) => ({
+                url:"/UserProfile/update-user-profile",
+                method: "PUT",
+                body: formData
+            }),
+            invalidatesTags:["userProfile"]
+        })
     })
 })
 
-export const { useGetProfileByIdQuery } = ProfileApi
+export const { useGetProfileByIdQuery , useUpdateUserProfileMutation} = ProfileApi

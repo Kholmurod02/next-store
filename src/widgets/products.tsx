@@ -54,7 +54,7 @@ export const ProductsInSwiper = () => {
     autoplay={{
       delay: 2500,
       disableOnInteraction: false,
-      pauseOnMouseEnter: false,
+      pauseOnMouseEnter: true,
       waitForTransition: true, // Added to prevent half-cut transitions
     }}
     speed={400} // Smoother transitions

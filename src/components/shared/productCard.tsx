@@ -11,6 +11,7 @@ import { URL } from "@/utils/config"
 import Link from "next/link"
 import { useAddProductToCartMutation } from "@/store/api/cartApiSlice"
 import { useRouter } from "next/navigation"
+import Like from "./like"
 
 interface Product {
   id: number
@@ -34,13 +35,8 @@ interface ProductCardProps {
   onQuickView?: (id: number) => void
 }
 
-export default function ProductCard({ el, onAddToCart, onAddToWishlist, onQuickView }: ProductCardProps) {
-  const [isWishlisted, setIsWishlisted] = useState(false)
-
-  const handleAddToWishlist = () => {
-    setIsWishlisted(!isWishlisted)
-    onAddToWishlist?.(el.id)
-  }
+export default function ProductCard({ el}: ProductCardProps) {
+  
 
 
   const [addProductToCart] = useAddProductToCartMutation()
@@ -49,7 +45,6 @@ export default function ProductCard({ el, onAddToCart, onAddToWishlist, onQuickV
 
   const handleAddToCart = async (id: number | string) => {
     try {
-
        await addProductToCart(id).unwrap()
     } catch (error: any) {
       if (error.status === 401) {
@@ -72,13 +67,7 @@ export default function ProductCard({ el, onAddToCart, onAddToWishlist, onQuickV
 
         {/* Action Buttons */}
         <div className="absolute top-3 right-3 z-10 flex flex-col gap-2">
-          <button
-            onClick={handleAddToWishlist}
-            className="bg-white rounded-full p-2 shadow-sm transition-all hover:scale-110"
-            aria-label="Add to wishlist"
-          >
-            <Heart className={cn("h-5 w-5", isWishlisted ? "fill-red-500 stroke-red-500" : "stroke-gray-600")} />
-          </button>
+          <Like el={[el]} />
           <Link href={`/products/${el.id}`}>
             <button
               className="bg-white rounded-full p-2 shadow-sm transition-all hover:scale-110"
