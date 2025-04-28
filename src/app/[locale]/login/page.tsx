@@ -6,7 +6,7 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Eye, EyeOff, Router } from "lucide-react"
+import { Eye, EyeOff} from "lucide-react"
 import { useLoginMutation } from "@/store/api/authApiSlice"
 import { useRouter } from "next/navigation"
 import toast from 'react-hot-toast'

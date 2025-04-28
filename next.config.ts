@@ -8,7 +8,6 @@ const nextConfig: NextConfig = {
     domains: ["store-api.softclub.tj"],
   },
   reactStrictMode: true,
-  swcMinify: true,
   typescript: {
     ignoreBuildErrors: true,
   },
