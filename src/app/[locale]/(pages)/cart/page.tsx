@@ -17,6 +17,7 @@ import Link from "next/link"
 import { useEffect } from "react"
 import { toast } from "react-hot-toast"
 import { Skeleton } from "@/components/ui/skeleton"
+import { useRouter } from "next/navigation"
 
 interface Product {
   id: number
@@ -52,10 +53,12 @@ export default function ShoppingCartPage() {
   const [reduceProduct] = useReduceProductMutation()
   const [deleteProductFromCart] = useDeleteProductFromCartMutation()
   const [clearCart] = useClearCartMutation()
+  const router = useRouter()
 
   useEffect(() => {
     if (error) {
       toast.error("Failed to load cart items")
+      router.push("/login")
     }
   }, [error])
 
