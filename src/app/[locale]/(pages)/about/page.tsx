@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from '@/components/ui/card'
 import { Building, ShoppingBag, Users, Eye, Instagram, Twitter, Linkedin } from "lucide-react"
-import portrait from '@/images/twoafricanfemales.png'
+import portrait from '@/images/females.png'
 import Image from "next/image"
 import image1 from '@/images/Frame874.png'
 import image2 from '@/images/Frame875.png'
@@ -51,6 +51,7 @@ export default function OurStorySection() {
             alt="Shopping experience"
             className="rounded-lg w-full h-auto object-cover"
             priority
+            fill
           />
         </div>
       </div>
