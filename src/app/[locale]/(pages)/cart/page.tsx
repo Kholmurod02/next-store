@@ -31,7 +31,7 @@ interface Product {
   productInMyCart: boolean
   categoryId: number
   categoryName: string | null
-  productInfoFromCart: any
+  productInfoFromCart: string | null
 }
 
 interface CartItem {
@@ -48,7 +48,7 @@ interface CartData {
 }
 
 export default function ShoppingCartPage() {
-  const { data, isLoading, error, refetch } = useGetProductsFromCartQuery()
+  const { data, isLoading, error, refetch } = useGetProductsFromCartQuery("")
   const [increaseProduct] = useIncreaseProductMutation()
   const [reduceProduct] = useReduceProductMutation()
   const [deleteProductFromCart] = useDeleteProductFromCartMutation()
@@ -60,7 +60,7 @@ export default function ShoppingCartPage() {
       toast.error("Failed to load cart items")
       router.push("/login")
     }
-  }, [error])
+  }, [])
 
   const cartData = data?.data?.[0] as CartData || {
     productsInCart: [],
@@ -102,7 +102,7 @@ export default function ShoppingCartPage() {
 
   async function handleClearCart() {
     try {
-      await clearCart().unwrap()
+      await clearCart('').unwrap()
       toast.success("Cart cleared successfully")
       refetch()
     } catch (error) {

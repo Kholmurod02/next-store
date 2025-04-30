@@ -1,13 +1,11 @@
-import { CategoryCard } from "@/components/shared/categoryCard";
 import Discount from "@/components/shared/discount";
 import FeaturesSection from "@/components/shared/features";
-import ProductCard from "@/components/shared/productCard";
 import ProductShowcase from "@/components/shared/productsShow";
 import Speaker from "@/components/shared/speaker";
 import Swiperr from "@/components/shared/swiper";
 import { Button } from "@/components/ui/button";
 import Categories, { UlCategories } from "@/widgets/categories";
-import Products, { ProductsInSwiper } from "@/widgets/products";
+import  { ProductsInSwiper } from "@/widgets/products";
 import Link from "next/link";
 
 export default async function HomePage() {

@@ -188,8 +188,8 @@ export default function ProductListing() {
         </div>
 
         {/* Product Grid */}
-        <div className="flex-1">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" >
+        <div className="flex-1 p-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2 p-2" >
             {
               filteredProducts?.data?.products?.map((el) => {
                 return (

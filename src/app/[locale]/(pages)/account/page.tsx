@@ -1,13 +1,11 @@
 "use client"
 
 import type React from "react"
-import { useState, useRef, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Loader2, Upload, X } from "lucide-react"
-import toast from "react-hot-toast"
 import { jwtDecode } from 'jwt-decode'
 import { useGetProfileByIdQuery, useUpdateUserProfileMutation } from "@/store/api/profileApiSlice"
 import { URL } from "@/utils/config"
@@ -37,7 +35,6 @@ export default function ProfileForm() {
   const { data: userData } = useGetProfileByIdQuery(userId?.sid)
   const [updateUserProfile] = useUpdateUserProfileMutation()
 
-  // Эффект для обновления состояний при загрузке данных пользователя
   useEffect(() => {
     if (userData?.data) {
       const user = userData.data

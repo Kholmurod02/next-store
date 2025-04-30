@@ -9,10 +9,19 @@ import image2 from '@/images/Frame875.png'
 import image3 from '@/images/Frame876.png'
 import FeaturesSection from "@/components/shared/features"
 
+interface StatCardProps {
+  icon: React.ReactNode;
+  value: string;
+  label: string;
+  bgColor?: string;
+  textColor?: string;
+}
 
-
-
-
+interface TeamMemberProps {
+  name: string;
+  role: string;
+  image: string;
+}
 
 export default function OurStorySection() {
   return (
@@ -25,11 +34,11 @@ export default function OurStorySection() {
           <div className="text-sm text-gray-600 space-y-3">
             <p>
               Founded in 2015, Fashionista is South Asia s premier online shopping marketplace with an active presence
-              in the region. Supported by a team of over 500 professionals, we've built an extensive database featuring
+              in the region. Supported by a team of over 500 professionals, we have built an extensive database featuring
               10,000 sellers and 350 brands and serve 3 million+ customers across the region.
             </p>
             <p>
-              Leveraging cutting-edge technology and passion for retail, we're very fast because there's diverse
+              Leveraging cutting-edge technology and passion for retail, we are very fast because there is diverse
               assortment of categories ranging from clothing, tech accessories.
             </p>
           </div>
@@ -41,6 +50,7 @@ export default function OurStorySection() {
             src={portrait}
             alt="Shopping experience"
             className="rounded-lg w-full h-auto object-cover"
+            priority
           />
         </div>
       </div>
@@ -66,7 +76,12 @@ export default function OurStorySection() {
           label="Customer active per year"
           bgColor="bg-white"
         />
-        <StatCard icon={<Eye className="h-5 w-5" />} value="25k" label="Average visits per site" bgColor="bg-white" />
+        <StatCard 
+          icon={<Eye className="h-5 w-5" />} 
+          value="25k" 
+          label="Average visits per site" 
+          bgColor="bg-white" 
+        />
       </div>
 
       {/* Team section - Three team members */}
@@ -76,20 +91,13 @@ export default function OurStorySection() {
         <TeamMember name="Will Smith" role="Product Designer" image={image3} />
       </div>
 
-      {/* Pagination dots */}
-      {/* <div className="flex justify-center space-x-1 mt-8">
-        {[0, 1, 2, 3, 4].map((index) => (
-          <span key={index} className={`h-2 w-2 rounded-full ${index === 0 ? "bg-red-500" : "bg-gray-300"}`} />
-        ))}
-      </div> */}
-
       <FeaturesSection/>
     </div>
   )
 }
 
 // Stat Card Component
-function StatCard({ icon, value, label, bgColor = "bg-white", textColor = "text-black" }) {
+function StatCard({ icon, value, label, bgColor = "bg-white", textColor = "text-black" }: StatCardProps) {
   return (
     <Card className={`border shadow-sm ${bgColor}`}>
       <CardContent className="p-6 flex flex-col items-center justify-center text-center">
@@ -102,26 +110,22 @@ function StatCard({ icon, value, label, bgColor = "bg-white", textColor = "text-
 }
 
 // Team Member Component
-function TeamMember({ name, role, image }) {
+function TeamMember({ name, role, image }: TeamMemberProps) {
   return (
     <div className="flex flex-col items-center">
-      <Image src={image || "/placeholder.svg"} alt={name} className="w-full h-auto p-5 aspect-square object-cover mb-4" />
+      <Image 
+        src={image} 
+        alt={name} 
+        className="w-full h-auto p-5 aspect-square object-cover mb-4" 
+        placeholder="blur"
+      />
       <h4 className="text-lg font-semibold">{name}</h4>
       <p className="text-sm text-gray-500">{role}</p>
       <div className="flex space-x-2 mt-2">
-        <Twitter/>
-        <Instagram />
-        <Linkedin/>
+        <Twitter className="w-4 h-4 text-gray-500 hover:text-blue-400 cursor-pointer"/>
+        <Instagram className="w-4 h-4 text-gray-500 hover:text-pink-600 cursor-pointer"/>
+        <Linkedin className="w-4 h-4 text-gray-500 hover:text-blue-700 cursor-pointer"/>
       </div>
-    </div>
-  )
-}
-
-// Simple Social Icon Component
-function SocialIcon() {
-  return (
-    <div className="w-5 h-5 flex items-center justify-center border border-gray-300 rounded-sm">
-      <span className="text-xs text-gray-500"><Instagram /></span>
     </div>
   )
 }

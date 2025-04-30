@@ -1,9 +1,7 @@
 "use client"
 
-import { useState } from "react"
 import Image from "next/image"
-import { Heart, Eye, ShoppingCart } from "lucide-react"
-import { cn } from "@/components/lib/utils"
+import { Eye, ShoppingCart } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -25,7 +23,7 @@ interface Product {
   productInMyCart: boolean
   categoryId: number
   categoryName: string
-  productInfoFromCart: any
+  productInfoFromCart: null | string
 }
 
 interface ProductCardProps {
@@ -43,16 +41,19 @@ export default function ProductCard({ el}: ProductCardProps) {
   const router = useRouter()
 
 
-  const handleAddToCart = async (id: number | string) => {
-    try {
-       await addProductToCart(id).unwrap()
-    } catch (error: any) {
-      if (error.status === 401) {
-        router.push("/login")
+const handleAddToCart = async (id: number | string) => {
+  try {
+    await addProductToCart(id).unwrap();
+  } catch (error) {
+    if (typeof error === "object" && error !== null && "status" in error) {
+      const err = error as { status: number };
+      if (err.status === 401) {
+        router.push("/login");
       }
     }
-
   }
+};
+
 
 
   return (
@@ -67,7 +68,7 @@ export default function ProductCard({ el}: ProductCardProps) {
 
         {/* Action Buttons */}
         <div className="absolute top-3 right-3 z-10 flex flex-col gap-2">
-          <Like el={[el]} />
+        <Like el={el} />
           <Link href={`/products/${el.id}`}>
             <button
               className="bg-white rounded-full p-2 shadow-sm transition-all hover:scale-110"
