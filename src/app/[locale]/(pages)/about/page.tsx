@@ -8,7 +8,6 @@ import Image from "next/image"
 // import image2 from '@/images/Frame875.png'
 // import image3 from '@/images/Frame876.png'
 import FeaturesSection from "@/components/shared/features"
-
 interface StatCardProps {
   icon: React.ReactNode;
   value: string;
