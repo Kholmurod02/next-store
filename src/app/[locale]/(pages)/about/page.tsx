@@ -1,8 +1,8 @@
 "use client"
 
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent } from "src/components/ui/card"
 import { Building, ShoppingBag, Users, Eye, Instagram, Twitter, Linkedin } from "lucide-react"
-import portrait from '@/images/two-african-females.png'
+import portrait from 'src/images/twoafricanfemales.png'
 import Image from "next/image"
 import image1 from '@/images/Frame874.png'
 import image2 from '@/images/Frame875.png'
