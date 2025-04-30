@@ -4,9 +4,9 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Building, ShoppingBag, Users, Eye, Instagram, Twitter, Linkedin } from "lucide-react"
 import portrait from '@/images/females.png'
 import Image from "next/image"
-import image1 from '@/images/Frame874.png'
-import image2 from '@/images/Frame875.png'
-import image3 from '@/images/Frame876.png'
+// import image1 from '@/images/Frame874.png'
+// import image2 from '@/images/Frame875.png'
+// import image3 from '@/images/Frame876.png'
 import FeaturesSection from "@/components/shared/features"
 
 interface StatCardProps {
@@ -20,7 +20,6 @@ interface StatCardProps {
 interface TeamMemberProps {
   name: string;
   role: string;
-  image: string;
 }
 
 export default function OurStorySection() {
@@ -87,9 +86,9 @@ export default function OurStorySection() {
 
       {/* Team section - Three team members */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-        <TeamMember name="Tom Cruise" role="Founder & Chairman" image={image1} />
-        <TeamMember name="Emma Watson" role="Managing Director" image={image2} />
-        <TeamMember name="Will Smith" role="Product Designer" image={image3} />
+        <TeamMember name="Tom Cruise" role="Founder & Chairman" />
+        <TeamMember name="Emma Watson" role="Managing Director" />
+        <TeamMember name="Will Smith" role="Product Designer"  />
       </div>
 
       <FeaturesSection/>
@@ -111,15 +110,15 @@ function StatCard({ icon, value, label, bgColor = "bg-white", textColor = "text-
 }
 
 // Team Member Component
-function TeamMember({ name, role, image }: TeamMemberProps) {
+function TeamMember({ name, role  }: TeamMemberProps) {
   return (
     <div className="flex flex-col items-center">
-      <Image 
+      {/* <Image 
         src={image} 
         alt={name} 
         className="w-full h-auto p-5 aspect-square object-cover mb-4" 
         placeholder="blur"
-      />
+      /> */}
       <h4 className="text-lg font-semibold">{name}</h4>
       <p className="text-sm text-gray-500">{role}</p>
       <div className="flex space-x-2 mt-2">
