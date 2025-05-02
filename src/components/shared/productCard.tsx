@@ -11,7 +11,7 @@ import { useAddProductToCartMutation } from "@/store/api/cartApiSlice"
 import { useRouter } from "next/navigation"
 import Like from "./like"
 
-interface Product {
+export interface IProduct {
   id: number
   productName: string
   image: string
@@ -27,7 +27,7 @@ interface Product {
 }
 
 interface ProductCardProps {
-  el: Product
+  el: IProduct
   onAddToCart?: (id: number) => void
   onAddToWishlist?: (id: number) => void
   onQuickView?: (id: number) => void

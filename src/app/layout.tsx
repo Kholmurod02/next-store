@@ -1,4 +1,3 @@
-import "./globals";
 import type { Metadata } from "next";
 import Header from "@/components/shared/header";
 import { NextIntlClientProvider } from 'next-intl';
@@ -7,6 +6,7 @@ import { notFound } from 'next/navigation';
 import Footer from "@/components/shared/footer";
 import StoreProvider from "@/store/storeProvider";
 import { Toaster } from "react-hot-toast";
+import "./globals.css";
 
 
 export const metadata: Metadata = {

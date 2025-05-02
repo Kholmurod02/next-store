@@ -60,7 +60,7 @@ export default function ShoppingCartPage() {
       toast.error("Failed to load cart items")
       router.push("/login")
     }
-  }, [])
+  }, [error, router])
 
   const cartData = data?.data?.[0] as CartData || {
     productsInCart: [],

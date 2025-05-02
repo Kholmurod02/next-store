@@ -10,15 +10,26 @@ import { jwtDecode } from 'jwt-decode'
 import { useGetProfileByIdQuery, useUpdateUserProfileMutation } from "@/store/api/profileApiSlice"
 import { URL } from "@/utils/config"
 
+interface IUser {
+  sid: string;
+  name: string;
+  email: string;
+  sub: string;
+  "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "User" | string; // Use union type if other roles exist
+  exp: number; // Unix timestamp
+  iss: "instagram-group" | string; // Use union type if other issuers exist
+  aud: "instagram-api" | string; // Use union type if other audiences exist
+}
+
 export default function ProfileForm() {
-  const [userId, setUserId] = useState(null)
+  const [userId, setUserId] = useState<IUser| null>(null)
   const [userName, setUserName] = useState('')
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [dob, setDob] = useState('')
-  const [image, setImage] = useState<string | null>('')
+  const [image, setImage] = useState<File | null>(null)
   const [role, setRole] = useState('')
 
   useEffect(() => {

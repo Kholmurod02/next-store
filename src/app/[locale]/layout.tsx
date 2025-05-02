@@ -1,6 +1,6 @@
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 
 export default async function LocaleLayout({
@@ -12,6 +12,9 @@ export default async function LocaleLayout({
 }) {
   const { locale } = params;
 
+  // Enable static rendering with next-intl
+  setRequestLocale(locale);
+
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
@@ -19,8 +22,13 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+    <NextIntlClientProvider messages={messages}>
+      {children}
+    </NextIntlClientProvider>
   );
+}
+
+// Add this function to pre-render all locale variants
+export function generateStaticParams() {
+  return routing.locales.map(locale => ({ locale }));
 }

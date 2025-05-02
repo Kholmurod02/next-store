@@ -10,6 +10,19 @@ import { useGetBrandsQuery, useGetCategoriesQuery } from "@/store/api/categoryAp
 import { useGetFilterProductsQuery } from "@/store/api/productApiSlice"
 import ProductCard from "@/components/shared/productCard"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { IProduct } from "@/types"
+
+interface ICategory {
+  id: number;
+  categoryImage: string;
+  categoryName: string;
+  // subCategories: SubCategory[];
+}
+
+interface IBrand {
+  id: number | string
+  brandName: string
+}
 
 export default function ProductListing() {
   const [priceRange, setPriceRange] = useState([1, 100000])
@@ -51,7 +64,7 @@ export default function ProductListing() {
                       value={categoryId}
                       onValueChange={(value) => setCategoryId(value)}
                     >
-                      {data?.data?.map((category) => (
+                      {data?.data?.map((category:ICategory) => (
                         <div key={category.id} className="flex items-center space-x-2">
                           <RadioGroupItem
                             value={category.id.toString()}
@@ -77,9 +90,9 @@ export default function ProductListing() {
                 <AccordionTrigger className="text-base font-medium">Brands</AccordionTrigger>
                 <AccordionContent>
                   <RadioGroup onValueChange={(value) => setBrandId(value)} className="space-y-2">
-                    {brands?.data?.map((brand) => (
+                    {brands?.data?.map((brand:IBrand) => (
                       <div key={brand.id} className="flex items-center space-x-2">
-                        <RadioGroupItem value={brand.id} id={`brand-${brand.id}`} />
+                        <RadioGroupItem value={`${brand.id}`} id={`brand-${brand.id}`} />
                         <label htmlFor={`brand-${brand.id}`} className="text-sm cursor-pointer">
                           {brand?.brandName}
                         </label>
@@ -191,7 +204,7 @@ export default function ProductListing() {
         <div className="flex-1 p-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2 p-2" >
             {
-              filteredProducts?.data?.products?.map((el) => {
+              filteredProducts?.data?.products?.map((el:IProduct) => {
                 return (
                   <ProductCard el={el} key={el.id} />
                 )
