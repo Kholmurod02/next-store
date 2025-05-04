@@ -1,6 +1,5 @@
 "use client"
 
-import { Card, CardContent } from '@/components/ui/card'
 import { Building, ShoppingBag, Users, Eye, Instagram, Twitter, Linkedin } from "lucide-react"
 import portrait from '@/images/females.png'
 import Image from "next/image"
@@ -8,6 +7,7 @@ import Image from "next/image"
 // import image2 from '@/images/Frame875.png'
 // import image3 from '@/images/Frame876.png'
 import FeaturesSection from "@/components/shared/features"
+import { Card, CardContent } from "@/components/ui/card"
 interface StatCardProps {
   icon: React.ReactNode;
   value: string;
